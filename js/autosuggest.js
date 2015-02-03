@@ -237,17 +237,21 @@
 			}
 		};
 
+		$scope.isPrevShown = function(){
+			return $scope.currentPage() == 0 ? "disabled" : "enabled";
+		}
+
+		$scope.isNextShown = function(){
+			return $scope.currentPage() == $scope.totalPages()-1 ? "disabled" : "enabled";
+		}
+
 		$scope.removeAllRics = function(ricnumber){
 			$scope.displayedRics = autoSuggestFactory.removeAllRics();
 		};
 
-		$scope.range = function(start,end){
+		$scope.range = function(end){
 			var ret = [];
-			if (!end){
-				end = start;
-				start = 0;
-			}
-			for (var i=start;i<end;i++){
+			for (var i=0;i<end;i++){
 				ret.push(i);
 			}
 			return ret;
