@@ -106,9 +106,14 @@
 				}
 			}
 			if($scope.suggests.length > 0){
-				$scope.displaySearchBox = true;	
+				$scope.displaySearchBox = true;
+				$scope.searchTextBox = "form-group";
+			}else if ($scope.suggests.length === 0 && $scope.searchRic.length === 0){
+				$scope.displaySearchBox = false;
+				$scope.searchTextBox = "form-group";
 			}else{
 				$scope.displaySearchBox = false;
+				$scope.searchTextBox = "form-group has-error";
 			}
 		};
 
