@@ -95,6 +95,36 @@
 
 	var app = angular.module("autoSuggestApp",[]);
 
+	app.service('autoSuggestService', function(){
+		var displayedRics = selectedResult;
+		var addRic = function(ric){
+			displayedRics.unshift(ric);
+			return displayedRics;
+		}
+		var removeRic = function(ricnumber){
+			for (var i=0,l=displayedRics.list.length; i<l;i++){
+				if (displayedRics.list[i].ric === ricnumber)
+					break;
+			}
+			displayedRics.list.splice(i, 1);
+			return displayedRics;
+		}
+		var removeAllRics = function(){
+			displayedRics = {"list":[]};
+			return displayedRics;
+		}
+		var getDisplayedRics = function(){
+			return displayedRics;
+		}
+
+		return {
+			addRic: addRic,
+			removeRic: removeRic,
+			removeAllRics: removeAllRics,
+			getDisplayedRics: getDisplayedRics
+		}
+	});
+
 	app.controller('autoSugesstCtrl', ['$scope', function($scope){
 		$scope.searchRic = function(){
 			$scope.suggests = [];
@@ -119,8 +149,8 @@
 
 	}]);
 
-	app.controller('selectedRicsCtrl', ['$scope', function($scope){
-		$scope.displayedRics = selectedResult;
+	app.controller('selectedRicsCtrl', ['$scope', function($scope, autoSuggestService){
+		$scope.displayedRics = autoSuggestService.getDisplayedRics();
 
 		$scope.currentPage = 0;
 		$scope.pageSize = 5;
@@ -156,17 +186,13 @@
 		}
 
 		$scope.removeRic = function(ricnumber){
-			for (var i=0,l=$scope.displayedRics.list.length; i<l;i++){
-				if ($scope.displayedRics.list[i].ric === ricnumber)
-					break;
-			}
-			$scope.displayedRics.list.splice(i, 1);
+			$scope.displayedRics = autoSuggestService.removeRic(ricnumber);
 			if ($scope.currentPage >= $scope.numberOfPage())
 				$scope.prevPage();
 		};
 
 		$scope.removeAllRics = function(ricnumber){
-			$scope.displayedRics.list = [];
+			$scope.displayedRics = autoSuggestService.removeAllRics();
 		};
 	}]);
 

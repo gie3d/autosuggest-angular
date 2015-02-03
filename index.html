@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<div ng-controller="selectedRicsCtrl">
-			<table class="table">
+			<table class="table" ng-if="displayedRics.list.length > 0">
 				<thead>
 					<tr>
 						<th>Title</th>
@@ -55,7 +55,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<div>
+			<div ng-if="numberOfPage()>1">
 				<nav>
 					<ul class="pagination">
 						<li ng-class="{disabled: currentPage == 0}" ng-click="prevPage()">
@@ -74,6 +74,7 @@
 					</ul>
 				</nav>
 			</div>
+			<div ng-if="displayedRics.list.length === 0">No selected RIC</div>
 		</div>
 	</div>
 	<script src="js/angular.min.js"></script>
