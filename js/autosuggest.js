@@ -95,9 +95,17 @@
 
 	var app = angular.module("autoSuggestApp",[]);
 
-	app.controller('autoSugesstCtrl', function(){
+	app.controller('autoSugesstCtrl', ['$scope', function($scope){
+		$scope.searchRic = function(){
+			console.log($scope.searchText)
+			if($scope.searchText.length > 0){
+				$scope.displaySearchBox = true;	
+			}else{
+				$scope.displaySearchBox = false;
+			}
+		};
 
-	});
+	}]);
 
 	app.controller('selectedRicsCtrl', ['$scope', function($scope){
 		$scope.displayedRics = selectedResult;
@@ -126,7 +134,7 @@
 		}
 
 		$scope.nextPage = function(){
-			if ($scope.currentPage < $scope.numberOfPage())
+			if ($scope.currentPage < $scope.numberOfPage()-1)
 				$scope.currentPage++;
 		}
 
