@@ -228,11 +228,10 @@
 
 		$scope.removeRic = function(ric){
 			var currentPage = $scope.currentPage();
-			var totalPages = $scope.totalPages();
 			var isDup = autoSuggestFactory.isRicDup(ric);
 			if (isDup.result){
 				$scope.displayedRics = autoSuggestFactory.removeRic(isDup.index);
-				if (currentPage >= totalPages)
+				if (currentPage >= $scope.totalPages())
 					$scope.prevPage();
 			}
 		};
