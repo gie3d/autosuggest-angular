@@ -56,7 +56,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<div ng-if="totalPages()>1">
+			<div ng-if="totalPages()>=1">
 				<nav>
 					<ul class="pagination">
 						<li ng-class="{disabled: currentPage() == 0}" ng-click="prevPage()">
@@ -75,7 +75,7 @@
 					</ul>
 				</nav>
 			</div>
-			<div ng-if="displayedRics.list.length === 0">No selected RIC</div>
+			<div ng-if="displayedRics.list.length === 0" align="center">No selected RIC</div>
 		</div>
 	</div>
 	<script src="js/angular.min.js"></script>
