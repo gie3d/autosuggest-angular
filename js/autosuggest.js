@@ -161,17 +161,21 @@
 	});
 
 	app.controller('autoSugesstCtrl', ['$scope', 'autoSuggestFactory', function($scope, autoSuggestFactory){
+		
 		$scope.searchRic = function(){
-			var dataSource = autoSuggestFactory.getDataSource();
+			
 			$scope.duplicateRicAlert = false;
+
+			var dataSource = autoSuggestFactory.getDataSource();
 			$scope.suggests = [];
 			var stext = $scope.searchText.toLowerCase();
-			//console.log(stext)
+			
 			for(var i=0,l=dataSource.rics.length;i<l;i++){
 				if ((dataSource.rics[i].ric.toLowerCase().indexOf(stext) !== -1 || dataSource.rics[i].subtitle.toLowerCase().indexOf(stext) !== -1 || dataSource.rics[i].title.toLowerCase().indexOf(stext) !== -1 || dataSource.rics[i].type.toLowerCase().indexOf(stext) !== -1) && $scope.searchText.length > 0){
 					$scope.suggests.push(dataSource.rics[i]);
 				}
 			}
+
 			if($scope.suggests.length > 0){
 				$scope.displaySearchBox = true;
 				$scope.searchTextBox = "form-group";
@@ -204,6 +208,7 @@
 	}]);
 
 	app.controller('selectedRicsCtrl', ['$scope', 'autoSuggestFactory', function($scope, autoSuggestFactory){
+		
 		$scope.displayedRics = autoSuggestFactory.getDisplayedRics();
 		$scope.pageSize = autoSuggestFactory.pageSize;		
 
@@ -215,8 +220,8 @@
 			return autoSuggestFactory.totalPages();
 		};
 
-		$scope.setPage = function(){
-			autoSuggestFactory.setPage(this.n);
+		$scope.setPage = function(n){
+			autoSuggestFactory.setPage(n);
 		};
 
 		$scope.nextPage = function(){
