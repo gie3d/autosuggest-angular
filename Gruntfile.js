@@ -24,8 +24,15 @@ module.exports = function (grunt) {
         uglify: {
             js: {
                 files: {
-                    'dist/js/app.min.js': ['dist/js/app.js']
+                    'dist/js/app.min.js': ['dist/js/app.js'],
+                    'dist/lib/angular.min.js': ['lib/angular.js']
                 }
+            }
+        },
+        copy: {
+            main: {
+                src: 'lib/bootstrap.min.css',
+                dest: 'dist/lib/bootstrap.min.css'
             }
         },
         'string-replace': {
@@ -40,6 +47,9 @@ module.exports = function (grunt) {
               }, {
                 pattern: 'js/autosuggest.js',
                 replacement: 'js/app.min.js'
+              }, {
+                pattern: 'lib/angular.js',
+                replacement: 'lib/angular.min.js'
               }]
             }
           }
@@ -49,6 +59,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-string-replace');
-    grunt.registerTask('default', ['concat:css', 'cssmin:css', 'concat:js', 'uglify:js', 'string-replace']);
+    grunt.registerTask('default', ['concat:css', 'cssmin:css', 'concat:js', 'uglify:js', 'copy:main','string-replace']);
 };
