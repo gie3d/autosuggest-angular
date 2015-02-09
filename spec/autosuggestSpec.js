@@ -11,11 +11,12 @@ describe('autoSuggestApp', function() {
 
 	describe('autoSuggestApp::selectedRicsCtrl', function() {
 		
-		var $scope, controller;
+		var $scope, controller, service;
 
 		beforeEach(function() {
 			$scope = {};
 			controller = $controller('selectedRicsCtrl', { $scope: $scope });
+			service = controller.get('autoSugesstCtrl');
 		});
 		// critical
 		it('should have selectedRicsCtrl', function(){
